@@ -1,0 +1,21 @@
+#样例旅
+[preset]
+#势力
+force="exampleForce"
+#玩家是否可用
+playerAvailable=true
+#可用单位列表
+[[preset.reinUnitList]]
+    name="ZSD89AReconB"
+    #Tank IFV ReconVehicle Car Soldier
+    type="ReconVehicle"
+    #临时参数，AI每次支援的最大可用数量
+    maxQuantityPerRein=1
+    coolDownTime=20.0
+    point=50
+[[preset.reinUnitList]]
+    name="HJ12"
+    type="Soldier"
+    maxQuantityPerRein=1
+    coolDownTime=20.0
+    point=40

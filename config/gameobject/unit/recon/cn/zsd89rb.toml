@@ -1,0 +1,208 @@
+#toml标准参考 https://toml.io/cn/v1.0.0
+#缩进不是必须的，但是推荐使用缩进以提高可读性
+#如果你理解toml的结构，可以将数据组织成任意形式，只要不破坏结构，调换顺序也没有问题，该文件仅展示推荐的组织方式
+
+[model]
+    #模型gltf文件索引
+    path="recon/cn/ZSD89AReconB.glb"
+    #可选，定义总材质文件，如果你使用最多的材质不是默认值，在这里定义可以加速导入速度
+    #默认值为"Universal Render Pipeline/Lit"
+    #overallMaterials="Universal Render Pipeline/Lit"
+
+#材质表数组，我们顺序地在每张表中定义所有的材质
+[[model.materials]]
+    name="ZSD89AReconVarB"
+    #可选，为当前材质更换着色器
+    #shader="Universal Render Pipeline/Lit"
+
+    #与unity内部一样，我们使用color，float,int,texture四个类型的变量覆盖需要调整的参数，每个类型的参数被保存在与其类型同名的表中
+    #特殊地，
+    #   一个color变量用{r=float,g=float,b=float,a=float}定义，如果有键未赋值，则会被赋予默认值rgb=0.0 a=1.0
+    #   一个texture变量用{path=string,format=string}定义
+    #可用格式类型参考https://docs.unity3d.com/ScriptReference/TextureFormat.html
+    #把同类的变量放在一起定义不是必须的，任意顺序的版本都可以被正常读取
+
+    #0=both 1=back 2=front
+    float._Cull=0.0
+    texture._BaseMap={path="recon/cn/zsd89r/ZSD89AReconVarB_ZSD89AReconVarB_AlbedoTransparency.jpg",format="DXT1",linear=false}
+    texture._MetallicGlossMap={path="recon/cn/zsd89r/ZSD89AReconVarB_ZSD89AReconVarB_MetallicSmoothness.png",format="DXT5",linear=true}
+    float._Smoothness=1.0
+    texture._BumpMap={path="recon/cn/zsd89r/ZSD89AReconVarB_ZSD89AReconVarB_Normal.jpg",format="DXT1",linear=true}
+    float._BumpScale=2.5
+    texture._ParallaxMap={path="recon/cn/zsd89r/ZSD89AReconVarB_ZSD89AReconVarB_Height.jpg",format="DXT1",linear=false}
+    float._Parallax=0.024
+    texture._OcclusionMap={path="recon/cn/zsd89r/ZSD89AReconVarB_ZSD89AReconVarB_AO.jpg",format="DXT1",linear=false}
+    texture._EmissionMap={path="recon/cn/zsd89r/ZSD89AReconVarB_Emission.png",format="DXT1",linear=false}
+
+[[model.materials]]
+    name="Tracks"
+    float._Cull=0.0
+    #1= 启用Alpha Test
+    float._AlphaClip=1.0
+    texture._BaseMap={path="recon/cn/zsd89r/ZSD89AReconVarB_Tracks_AlbedoTransparency.png",format="DXT5",linear=false}
+    texture._MetallicGlossMap={path="recon/cn/zsd89r/ZSD89AReconVarB_Tracks_MetallicSmoothness.png",format="DXT5",linear=true}
+    float._Smoothness=1.0
+    texture._BumpMap={path="recon/cn/zsd89r/ZSD89AReconVarB_Tracks_Normal.png",format="DXT1",linear=true}
+    texture._OcclusionMap={path="recon/cn/zsd89r/ZSD89AReconVarB_Tracks_AO.png",format="DXT1",linear=false}
+    texture._EmissionMap={path="recon/cn/zsd89r/ZSD89AReconVarB_Tracks_Emission.png",format="DXT1",linear=false}
+
+#======objectInfo======
+[info]
+    userName="ZSD89AReconB"
+    showName="ZSD-89A B型装甲侦察车"
+
+#======LifeController======
+    #在3d视图里使用的ui类型
+    #vheicle human
+    uiType="vehicle"
+    #单位头像，仅human下有效
+    # avatar="3dHelper/human/soldier/cn/HJ12E.png"
+    health=600
+
+#======ThicknessInfo======
+#[armor.boneName]
+[armor.ZSD89AReconVarB_vol]
+    blockName="车体"
+    thickness={front=60.0,side=40.0,back=30.0,top=20.0}
+    #受击伤害阈值
+    maxDamage=-1.0
+    #装甲种类
+    type="Steel"
+
+[armor.Turret_vol]
+    blockName="炮塔"
+    thickness={front=60.0,side=40.0,back=30.0,top=20.0}
+    maxDamage=-1.0
+    type="Steel"
+
+#======TurretController======
+#[turret.boneName]
+#实际上是指可旋转部件，炮塔，炮盾等都算
+[turret.Turret]
+    #degree/s
+    spinSpeed=36.0
+    angleMin=0.0
+    angleMax=0.0
+    #旋转轴 支持XYZ及其反向轴RX RY RZ
+    rotateAxis="Y"
+
+[turret.gun]
+    spinSpeed=20.0
+    angleMin=-20.0
+    angleMax=10.0
+    rotateAxis="X"
+
+[turret.RadarMast1]
+    spinSpeed=36.0
+    angleMin=0.0
+    angleMax=0.0
+    rotateAxis="Y"
+
+#======RotateCollectionController======
+#[rotateController.boneName]
+#游戏会检查是否是绝对路径，如果不是，且存在重名，会注册第一个找到的骨骼
+#文本顺序即为游戏中表单内排列顺序
+
+[rotateController.foresight1]
+    #shoot=武器 visor=观瞄
+    type="shoot"
+    #是否只允许单层旋转，一般用于无俯仰观瞄
+    IsSingleRotate=false
+    #当前不可用参数，用于调用动画
+    #Fire_Trigger="OnFire"
+    #同样的，支持绝对路径和相对路径
+    #绝对路径从blockName/config/parameters/weapon/文件夹开始
+    #即gun/autoCannon/ZPT99
+    weapon="ZPT99"
+[rotateController.foresight2]
+    type="shoot"
+    IsSingleRotate=false
+    weapon="coaxialMgun"
+[rotateController.Visor2]
+    #visorController必须部署在有视野绑定的骨骼上
+    #visorController负责视野旋转和模式切换，没有该部件的视野即使有多模式也无法切换
+    type="visor"
+    IsSingleRotate=true
+
+#======ViewManager======
+#[viewfields.boneName]
+
+[viewfields.Visor1]
+    info="SightOptic2Gen"
+    #可选参数，如果不注册即为注释中的默认参数
+    # targetMask=["Unit"]
+    # obstacleMask=["Obstacle","Terrain","Building"]
+[viewfields.Visor2]
+    info="SightOpticIRReconB"
+[viewfields.Visor3]
+    info="SightOpticPeriscopeWide120Deg"
+[viewfields.Visor4]
+    info="SightOpticPeriscope"
+
+#======Move Controller======
+[maneuverability]
+    #Tracked=履带 Wheeled=轮式 Human=人类
+    moveType="Tracked"
+    #挡位速度
+    speedGear=[8.0,9.5,11.0]
+    #漂移比例
+    driftScale=0.91
+    #最大角速度 degree/s
+    maxAngularSpeed=30.0
+    #加速度 m/s^2
+    acceleration=8.5
+    #角加速度 degree/s^2
+    angularAcceleration=40.0
+    #阻力 m/s
+    drag=7.0
+    #滑动摩擦比例
+    moveDragScale=0.75
+    #角阻力 degree/s
+    angularDrag=25.0
+
+[trackSettings]
+    tracksL=[
+        "Scene/ZSD89AReconVarB/suspension/TrackLeft"
+        ]
+    tracksR=[
+        "Scene/ZSD89AReconVarB/suspension/TrackRight"
+    ]
+    # 0=沿x移动 1=沿y移动
+    trackDir=1
+    trackSpd=0.01
+    trackThickness=0.1
+    # 0=差速旋转 1=单边旋转
+    trackRotateType=1
+    #履带是否被蒙皮
+    trackSkinned=true
+
+[wheelSettings]
+    #Bone=是轮子的骨骼 Dynamic=是否为动态悬挂
+    #如果是动态悬挂，后缀为Dy的额外骨骼代替主骨骼旋转轮子
+
+    wheelsL=[
+        {Bone="Scene/ZSD89AReconVarB/suspension/WheelL0Dy/WheelL0",Dynamic=false},
+        {Bone="Scene/ZSD89AReconVarB/suspension/WheelL1Dy/WheelL1",Dynamic=false},
+        {Bone="Scene/ZSD89AReconVarB/suspension/WheelL2",Dynamic=true,DySuffix="Dy"},
+        {Bone="Scene/ZSD89AReconVarB/suspension/WheelL3",Dynamic=true,DySuffix="Dy"},
+        {Bone="Scene/ZSD89AReconVarB/suspension/WheelL4",Dynamic=true,DySuffix="Dy"},
+        {Bone="Scene/ZSD89AReconVarB/suspension/WheelL5",Dynamic=true,DySuffix="Dy"},
+        {Bone="Scene/ZSD89AReconVarB/suspension/WheelL6",Dynamic=true,DySuffix="Dy"},
+        {Bone="Scene/ZSD89AReconVarB/suspension/WheelL7",Dynamic=true,DySuffix="Dy"}
+    ]
+    wheelsR=[
+        {Bone="Scene/ZSD89AReconVarB/suspension/WheelR0Dy/WheelR0",Dynamic=false},
+        {Bone="Scene/ZSD89AReconVarB/suspension/WheelR1Dy/WheelR1",Dynamic=false},
+        {Bone="Scene/ZSD89AReconVarB/suspension/WheelR2",Dynamic=true,DySuffix="Dy"},
+        {Bone="Scene/ZSD89AReconVarB/suspension/WheelR3",Dynamic=true,DySuffix="Dy"},
+        {Bone="Scene/ZSD89AReconVarB/suspension/WheelR4",Dynamic=true,DySuffix="Dy"},
+        {Bone="Scene/ZSD89AReconVarB/suspension/WheelR5",Dynamic=true,DySuffix="Dy"},
+        {Bone="Scene/ZSD89AReconVarB/suspension/WheelR6",Dynamic=true,DySuffix="Dy"},
+        {Bone="Scene/ZSD89AReconVarB/suspension/WheelR7",Dynamic=true,DySuffix="Dy"}
+    ]
+    # Vector3向量，(x,y,z)，为abs(1.0)的位为轮子的旋转轴，为abs(2.0)的位为轮子的向下方向
+    wheelDir=[2.0,1.0,0.0]
+    wheelSpd=0.5
+    #向下和向上的轮子动态限制
+    wheelDynamicLimit=[0.2,0.1]
+    wheelRadius=0.5

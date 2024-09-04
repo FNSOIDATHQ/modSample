@@ -1,0 +1,18 @@
+[sightInfo]
+showedName="潜望镜"
+#[availableType.name]
+[availableType.1x]
+    #辅助线的分辨率
+    curveResolution=32
+    #视野范围
+    radius=100.0
+    #视野角度 
+    # [Range(0,360)]
+    angle=30.0
+    #垂直角度
+    # [Range(0,90)]
+    angleVerticalUp=10.0
+    # [Range(0,90)]
+    angleVerticalDown=3.0
+    #刷新速度
+    refreshTime=2.0

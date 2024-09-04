@@ -1,0 +1,18 @@
+[sightInfo]
+showedName="光电侦察塔"
+#[availableType.name]
+[availableType.10x]
+    #辅助线的分辨率
+    curveResolution=32
+    #视野范围
+    radius=1000.0
+    #视野角度 
+    # [Range(0,360)]
+    angle=30.0
+    #垂直角度
+    # [Range(0,90)]
+    angleVerticalUp=10.0
+    # [Range(0,90)]
+    angleVerticalDown=10.0
+    #刷新速度
+    refreshTime=0.5

@@ -1,0 +1,18 @@
+[sightInfo]
+showedName="人眼(开放式载具)"
+#[availableType.name]
+[availableType."正常视野"]
+    #辅助线的分辨率
+    curveResolution=32
+    #视野范围
+    radius=250.0
+    #视野角度 
+    # [Range(0,360)]
+    angle=120.0
+    #垂直角度
+    # [Range(0,90)]
+    angleVerticalUp=30.0
+    # [Range(0,90)]
+    angleVerticalDown=40.0
+    #刷新速度
+    refreshTime=1.0

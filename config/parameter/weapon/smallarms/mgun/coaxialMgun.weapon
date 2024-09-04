@@ -1,0 +1,28 @@
+[weapon]
+showedName="同轴机枪"
+#最大载弹量
+maxAmmo=100
+#装填时间
+reloadTime=0.075
+#补给时间
+refillTime=30.0
+#武器和弹药都有精度，但是弹药的精度稳定不变，武器精度随连射或者其它原因起伏
+#武器精度
+accuracy=1.0
+#连射精度衰减乘数
+accuracyMultiplier=1.1
+#连射精度衰减乘数极值
+accuracyMWorst=3.0
+#精度回升间隔
+accuracyReboundInterval=0.1
+#精度回升乘数
+accuracyReboundMultiplier=1.1
+
+#所有可用的弹药类型
+availableType=["bulletDVP88"]
+
+#开火模式
+fireModeAvailable=[
+    {count=6,interval=0.0},
+    {count=-1,interval=0.0}
+]

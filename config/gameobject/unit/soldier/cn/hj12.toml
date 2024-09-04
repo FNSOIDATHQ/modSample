@@ -1,0 +1,59 @@
+[model]
+    path="soldier/soldierTemp.glb"
+
+#======objectInfo======
+[info]
+    userName="HJ12"
+    showName="反坦克手（HJ12）"
+
+#======LifeController======
+    uiType="human"
+    #单位头像，仅human下有效
+    avatar="3dHelper/human/soldier/cn/HJ12E.png"
+    health=22
+
+#======ThicknessInfo======
+[armor.armor_vol]
+    blockName="人体"
+    thickness={front=4.0,side=3.0,back=3.0,top=0.0}
+    maxDamage=-1.0
+    type="Bulletproof Plate+"
+
+#======TurretController======
+[turret.turret]
+    spinSpeed=45.0
+    angleMin=0.0
+    angleMax=0.0
+    rotateAxis="Y"
+
+[turret.foresight1]
+    spinSpeed=45.0
+    angleMin=-90.0
+    angleMax=90.0
+    rotateAxis="X"
+
+#======RotateCollectionController======
+[rotateController.foresight1]
+    type="shoot"
+    IsSingleRotate=false
+    weapon="HJ12"
+[rotateController.foresight2]
+    type="shoot"
+    IsSingleRotate=false
+    weapon="QBZ95B"
+
+#======ViewManager======
+[viewfields.foresight1]
+    info="SightOpticIR3Gen"
+
+#======Move Controller======
+[maneuverability]
+    moveType="Human"
+    speedGear=[1.5,2.5,4.0]
+    driftScale=1.1
+    maxAngularSpeed=180.0
+    acceleration=3.0
+    angularAcceleration=270.0
+    drag=2.5
+    moveDragScale=1.0
+    angularDrag=90.0
